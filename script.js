@@ -27,10 +27,38 @@ function sumOfExpenses(yearlyExpences) {
   return totalSum;
 }
 
-function testExpencesExamples(expencesExamples){      //проверяем что работает для каждого массива 
+///
+function getMonthName(i) {
+    let date = new Date();
+    date.setMonth(i);
+    return date.toLocaleString("default", { month: "long" });
+  }
+
+function monthsWithLowExpenses(yearlyExpences) {
+    let monthsNamesLowExpenses = [];
+    for (let i = 0; i < yearlyExpences.length; i++) {
+      if (yearlyExpences[i] <= 1000) {  
+        monthsNamesLowExpenses.push(getMonthName(i));
+      }
+    }
+    //console.log(monthsNamesLowExpenses);
+    return monthsNamesLowExpenses;
+  }
+
+
+
+function testExpencesExamples(expencesExamples) {
+  expencesExamples.forEach((example) => {
+    console.log(`Sum of expenses of costs more than 1000 is ${sumOfExpenses(example.yearlyExpences)}`);
+  });
+};
+
+
+function testMonthWithLowExpences(expencesExamples){
     expencesExamples.forEach((example) => {
-        console.log(sumOfExpenses(example.yearlyExpences));
-})
-  };
+        console.log(`Months with expenses below or equal to 1000 are: ${monthsWithLowExpenses(example.yearlyExpences)}`);
+      });
+};
+
 testExpencesExamples(expencesExamples);
-  
+testMonthWithLowExpences(expencesExamples);
